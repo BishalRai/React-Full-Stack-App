@@ -16,9 +16,11 @@ app.get("/", async function (req,res){
 
     try{
         const connection = await mysql.createConnection(config.db)
-        res.status(200).send('Database connection was made')
+        const [result,] = await connection.execute('select * from task')
+        if(!result) result = [] //if there is no data return empty array
+        res.status(200).json(result)
     }catch(err){
-        res.status(200).send(err.message)
+        res.status(500).Json({error: err.message})
     }
 
     
