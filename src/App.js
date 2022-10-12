@@ -71,8 +71,9 @@ function remove(id){
       </form>
 
       <ol>
+        {/* adding HyperLink in each line for deletion of that line */}
         {details.map(detail => (
-          <li key={detail.id}>{detail.fname} {detail.lname}</li>
+          <li key={detail.id}>{detail.fname} {detail.lname} <a href = "#" onClick={() => remove(detail.id)}> Delete </a></li>
         ))}
       </ol>
     </div>
