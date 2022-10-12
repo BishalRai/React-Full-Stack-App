@@ -23,7 +23,7 @@ function App() {
       <h2>Teacher's List</h2>
       <ol>
         {details.map(detail => (
-          <li key = {detail.id}>{detail.fname}{detail.lname}</li>
+          <li key = {detail.id}>{detail.fname} {detail.lname}</li>
         ))}
       </ol>
     </div>
