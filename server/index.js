@@ -32,7 +32,7 @@ app.post("/new",async function(req,res){
         const [result,] = await connection.execute('insert into detail (fname) values(?)',[req.body.fname])
 
         // const [result,] = await connection.execute('insert into detail (fname,lname) values(?)',[req.body.fname, req.body.lname])
-        
+
         res.status(200).json({id:result.insertId})
     } catch(err) {
         res.status(500).json({error: err.message})
@@ -41,5 +41,16 @@ app.post("/new",async function(req,res){
 
 
 //For Deletion
+
+app.delete("/delete/:id", async function(req, res){
+    try{
+        const connection = await mysql.createConnection(config.db)
+        //Execute prepared statement.
+        await connection.execute('delete from detail where id = ?',[req.params.id])
+        res.status(200).json({id:req.params.id})
+    }catch(err){
+        res.status(500).json({error: err.message})
+    }
+})
 
 app.listen(port)
