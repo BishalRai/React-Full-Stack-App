@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 
 //for database purpose
-const myaql = reuire('mysql/promise')
+const mysql = require('mysql2/promise')
 const config = require('./config')
 
 
