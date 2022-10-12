@@ -20,20 +20,26 @@ app.get("/", async function (req,res){
         if(!result) result = [] //if there is no data return empty array
         res.status(200).json(result)
     }catch(err){
-        res.status(500).Json({error: err.message})
+        res.status(500).json({error: err.message})
     }    
 })
 
-//POST SECTION FOR INSERT, DELETE PURPOSE
+//POST SECTION FOR INSERT PURPOSE
 app.post("/new",async function(req,res){
     try{
         const connection = await mysql.createConnection(config.db)
         //Execute prepared statement
-        const [result,] = await connection.execute('insert into detail (fname,lname) values(?)',[req.body.firstN, req.body.LastN])
+        const [result,] = await connection.execute('insert into detail (fname) values(?)',[req.body.fname])
+
+        // const [result,] = await connection.execute('insert into detail (fname,lname) values(?)',[req.body.fname, req.body.lname])
+        
         res.status(200).json({id:result.insertId})
     } catch(err) {
         res.status(500).json({error: err.message})
     }
 })
+
+
+//For Deletion
 
 app.listen(port)
