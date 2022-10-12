@@ -1,12 +1,26 @@
 const express = require('express')
 const cors = require('cors')
+
+//for database purpose
+const myaql = reuire('mysql/promise')
+const config = require('./config')
+
+
 const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 const port = 3001
 //add app get section here
-app.get("/", (req,res) => {
-    res.status(200).json({message: "Node Server is responding."})
+app.get("/", async function (req,res){
+
+    try{
+        const connection = await mysql.createConnection(config.db)
+        res.status(200).send('Database connection was made')
+    }catch(err){
+        res.status(200).send(err.message)
+    }
+
+    
 })
 app.listen(port)
